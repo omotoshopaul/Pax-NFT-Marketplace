@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Image from "next/image"
 
 interface NFT {
@@ -57,6 +57,20 @@ interface NFTMarketGridProps {
 
 export default function NFTMarketGrid({ searchQuery, priceRange, category, sortBy }: NFTMarketGridProps) {
   const [nfts] = useState<NFT[]>(generateNFTs())
+  const [visibleCount, setVisibleCount] = useState(12)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY
+      const threshold = document.documentElement.scrollHeight - 500
+      if (scrollPosition >= threshold && visibleCount < filteredAndSortedNFTs.length) {
+        setVisibleCount((prev) => Math.min(prev + 12, filteredAndSortedNFTs.length))
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [visibleCount])
 
   const filteredAndSortedNFTs = useMemo(() => {
     const filtered = nfts.filter((nft) => {
@@ -99,17 +113,17 @@ export default function NFTMarketGrid({ searchQuery, priceRange, category, sortB
     <section className="w-full py-12 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <p className="text-gray-600 mb-8">
-          Showing {filteredAndSortedNFTs.length} of {nfts.length} NFTs
+          Showing {Math.min(visibleCount, filteredAndSortedNFTs.length)} of {filteredAndSortedNFTs.length} NFTs
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredAndSortedNFTs.map((nft, index) => (
+          {filteredAndSortedNFTs.slice(0, visibleCount).map((nft, index) => (
             <div
               key={nft.id}
               className="group cursor-pointer animate-fade-in"
               style={{ animationDelay: `${(index % 8) * 50}ms` }}
             >
-              <div className="relative overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="relative overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-2 hover:border-[#f85522]">
                 <div className="relative w-full aspect-square">
                   <Image src={nft.image || "/placeholder.svg"} alt={nft.name} fill className="object-cover" />
                 </div>

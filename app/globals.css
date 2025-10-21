@@ -202,6 +202,28 @@ html {
   }
 }
 
+@keyframes blurOut {
+  from {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  to {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
 .animate-fade-out {
   animation: fadeOut 1s ease-out forwards;
 }
@@ -228,6 +250,14 @@ html {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s infinite;
+}
+
+.animate-blur-out {
+  animation: blurOut 0.7s ease-in-out forwards;
+}
+
+.animate-blur-in {
+  animation: blurIn 0.7s ease-in-out forwards;
 }
 
 /* Responsive typography */

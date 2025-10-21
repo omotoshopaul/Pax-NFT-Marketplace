@@ -137,8 +137,7 @@ export default function SwapInterface() {
           <p className="text-gray-600">Convert $PAX to other tokens instantly</p>
         </div>
 
-        {/* Swap Card */}
-        <div className="backdrop-blur-xl bg-white/80 border-2 border-white/50 rounded-2xl p-8 shadow-2xl">
+        <div className="backdrop-blur-xl bg-white/80 border-2 border-white/50 rounded-2xl p-8 shadow-2xl hover:border-[#f85522]/30 transition-all duration-300">
           {/* From Token */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-black mb-3">From</label>
@@ -229,11 +228,12 @@ export default function SwapInterface() {
             </div>
           </div>
 
-          {/* Swap Button */}
           <button
             onClick={handleSwap}
             disabled={swap.isSwapping || !swap.fromAmount}
-            className="w-full py-4 bg-black text-white rounded-lg font-semibold hover:bg-[#f85522] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+            className={`w-full py-4 bg-black text-white rounded-lg font-semibold hover:bg-[#f85522] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden ${
+              swap.isSuccess ? "animate-pulse-glow" : ""
+            }`}
           >
             {swap.isSwapping ? (
               <div className="flex items-center justify-center gap-2">

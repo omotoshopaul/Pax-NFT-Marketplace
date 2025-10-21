@@ -46,22 +46,52 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>
                 <a
-                  href="https://twitter.com"
+                  href="https://t.me/paxblockchain"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#f85522] transition-colors"
                 >
-                  Twitter
+                  Telegram
                 </a>
               </li>
               <li>
                 <a
-                  href="https://discord.com"
+                  href="https://x.com/pax_blockchain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#f85522] transition-colors"
+                >
+                  X
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://medium.com/@paxblockchain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#f85522] transition-colors"
+                >
+                  Medium
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://discord.com/invite/eBgbC66Pzw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#f85522] transition-colors"
                 >
                   Discord
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Pax-Blockchain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#f85522] transition-colors"
+                >
+                  GitHub
                 </a>
               </li>
             </ul>

@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { WalletProvider } from "@/app/providers"
+import Navbar from "@/components/navbar"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -21,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        {children}
+        <WalletProvider>
+          <Navbar />
+          <div className="transition-all duration-700 ease-in-out">{children}</div>
+        </WalletProvider>
         <Analytics />
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useWallet } from "@/app/providers"
 import { LogOut } from "lucide-react"
@@ -8,7 +8,16 @@ import { LogOut } from "lucide-react"
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [showWalletMenu, setShowWalletMenu] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { isConnected, connectWallet, disconnectWallet, walletAddress } = useWallet()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const handleWalletClick = () => {
     if (!isConnected) {
@@ -20,7 +29,11 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-white/70 border-b border-gray-200">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "backdrop-blur-md bg-white/85 shadow-lg" : "backdrop-blur-md bg-white/50"
+      } border-b border-gray-200`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

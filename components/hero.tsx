@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useWallet } from "@/app/providers"
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { connectWallet } = useWallet()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -69,6 +71,10 @@ export default function Hero() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  const handleExploreClick = () => {
+    connectWallet()
+  }
+
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden pt-16">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
@@ -77,13 +83,16 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 leading-tight">
-          Discover, Collect, and Trade Digital Masterpieces
+          Powering Trusted Digital Identities.
         </h1>
         <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Join the next generation of creators and collectors on Pax.
+          We're redefining how people prove who they are — secure, decentralized, and entirely yours.
         </p>
-        <button className="px-8 py-4 bg-[#f85522] text-white rounded-full font-semibold hover:bg-[#e64a1a] transition-all duration-300 transform hover:scale-105 shadow-lg">
-          Explore Marketplace
+        <button
+          onClick={handleExploreClick}
+          className="px-8 py-4 bg-[#f85522] text-white rounded-full font-semibold hover:bg-[#e64a1a] transition-all duration-300 transform hover:scale-105 shadow-lg"
+        >
+          Explore NFTs
         </button>
       </div>
     </section>

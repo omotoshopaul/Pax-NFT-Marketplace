@@ -1,12 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { WalletProvider } from "./providers"
 import Navbar from "@/components/navbar"
 import Hero from "@/components/hero"
-import NFTGallery from "@/components/nft-gallery"
-import About from "@/components/about"
-import Contact from "@/components/contact"
-import FadeOutFooter from "@/components/fade-out-footer"
+import NFTPreview from "@/components/nft-preview"
+import PointsSystem from "@/components/points-system"
+import Reviews from "@/components/reviews"
+import Footer from "@/components/footer"
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -26,13 +27,15 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="w-full overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <NFTGallery />
-      <About />
-      <Contact />
-      <FadeOutFooter scrollProgress={scrollProgress} />
-    </main>
+    <WalletProvider>
+      <main className="w-full overflow-x-hidden bg-white">
+        <Navbar />
+        <Hero />
+        <NFTPreview />
+        <PointsSystem />
+        <Reviews />
+        <Footer />
+      </main>
+    </WalletProvider>
   )
 }
